@@ -17,19 +17,21 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
+    - setuptools
+    - wheel
   run:
     - python >=3.6
 
 test:
   imports:
     - {{ modulename }}
-  requires:
-    - pytest
-    - spacy >=3.0.0,<3.1.0
-  commands:
-    - python -m pytest --tb=native --pyargs {{ modulename }}
+  # requires:
+  #  - pytest
+  #  - spacy >=3.0.0,<3.1.0
+  # commands:
+  #  - python -m pytest --tb=native --pyargs {{ modulename }}
 
 
 about:
