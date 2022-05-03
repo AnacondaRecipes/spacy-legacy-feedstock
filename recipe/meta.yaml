@@ -28,12 +28,13 @@ test:
   imports:
     - {{ modulename }}
   requires:
-    - pytest
-    - spacy >=3.1.0,<3.3.0  # [not ((osx and arm64) or s390x)]
+    - pip
+    #- pytest
+    #- spacy >=3.1.0,<3.3.
   commands:
+    - pip check
     # wandb package isn't available for test_logger
-    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"   # [not ((osx and arm64) or s390x)]
-
+    #- python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
 
 about:
   home: https://github.com/explosion/spacy-legacy
