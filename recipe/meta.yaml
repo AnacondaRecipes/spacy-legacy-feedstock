@@ -31,7 +31,8 @@ test:
     - pytest
     - spacy >=3.1.0,<3.3.0
   commands:
-    - python -m pytest --tb=native --pyargs {{ modulename }}
+    # wandb package isn't available for test_logger
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
 
 
 about:
