@@ -1,6 +1,6 @@
 {% set name = "spacy-legacy" %}
 {% set modulename = "spacy_legacy" %}
-{% set version = "3.0.9" %}
+{% set version = "3.0.12" %}
 
 package:
   name: {{ name|lower }}
@@ -13,7 +13,7 @@ source:
 build:
   skip: True # [py<36]
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -29,12 +29,12 @@ test:
     - {{ modulename }}
   requires:
     - pip
-    #- pytest
-    #- spacy >=3.1.0,<3.3.
+    - pytest >=5.0.1
+    - spacy >=3.1.0,<3.3.1
   commands:
     - pip check
     # wandb package isn't available for test_logger
-    #- python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
 
 about:
   home: https://github.com/explosion/spacy-legacy
