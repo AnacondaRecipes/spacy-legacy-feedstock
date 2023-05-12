@@ -30,7 +30,7 @@ test:
   requires:
     - pip
     - pytest >=5.0.1
-    - spacy >=3.1.0,<3.3.1
+    - spacy >=3.1.0,<3.3.2
   commands:
     - pip check
     # wandb package isn't available for test_logger
