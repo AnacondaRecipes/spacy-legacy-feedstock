@@ -35,7 +35,8 @@ test:
   commands:
     - pip check
     # wandb package isn't available for test_logger
-    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
+    # spacy <3.4.2 hasn't Python 3.11 support
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"  # [py<311]
 
 about:
   home: https://github.com/explosion/spacy-legacy
