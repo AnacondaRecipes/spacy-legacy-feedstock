@@ -29,13 +29,13 @@ test:
     - {{ modulename }}
   requires:
     - pip
-    #- pytest >=5.0.1
+    - pytest >=5.0.1
     # spacy is a ciclic dependency
-    #- spacy >=3.1.0,<3.3.2
+    - spacy >=3.1.0,<3.3.2
   commands:
     - pip check
     # wandb package isn't available for test_logger
-    #- python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
 
 about:
   home: https://github.com/explosion/spacy-legacy
