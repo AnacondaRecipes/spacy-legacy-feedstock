@@ -1,6 +1,6 @@
 {% set name = "spacy-legacy" %}
 {% set modulename = "spacy_legacy" %}
-{% set version = "3.0.9" %}
+{% set version = "3.0.12" %}
 
 package:
   name: {{ name|lower }}
@@ -8,12 +8,12 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 4f7dcbc4e6c8e8cb4eadbb009f9c0a1a2a67442e0032c8d6776c9470c3759903
+  sha256: b37d6e0c9b6e1d7ca1cf5bc7152ab64a4c4671f59c85adaf7a3fcb870357a774
 
 build:
   skip: True # [py<36]
   number: 0
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   host:
@@ -29,12 +29,14 @@ test:
     - {{ modulename }}
   requires:
     - pip
-    #- pytest
-    #- spacy >=3.1.0,<3.3.
+    - pytest >=5.0.1
+    # spacy is a ciclic dependency
+    - spacy >=3.1.0,<3.3.2  # [py<311 and not (linux and s390x)]
   commands:
     - pip check
     # wandb package isn't available for test_logger
-    #- python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"
+    # spacy <3.4.2 hasn't Python 3.11 support
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"  # [py<311 and not (linux and s390x)]
 
 about:
   home: https://github.com/explosion/spacy-legacy
