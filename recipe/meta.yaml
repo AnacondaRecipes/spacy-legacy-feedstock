@@ -31,12 +31,12 @@ test:
     - pip
     - pytest >=5.0.1
     # spacy is a ciclic dependency
-    - spacy >=3.1.0,<3.3.2  # [py<311 or not (linux and s390x)]
+    - spacy >=3.1.0,<3.3.2  # [py<311 and not (linux and s390x)]
   commands:
     - pip check
     # wandb package isn't available for test_logger
     # spacy <3.4.2 hasn't Python 3.11 support
-    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"  # [py<311 or not (linux and s390x)]
+    - python -m pytest --tb=native --pyargs {{ modulename }} -k "not test_logger"  # [py<311 and not (linux and s390x)]
 
 about:
   home: https://github.com/explosion/spacy-legacy
